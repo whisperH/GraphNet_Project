@@ -1,0 +1,74 @@
+# Required
+dataset:
+  data_root: /media/server/Newsmy/WSI_RawData/CY_SL_FD_HS/
+  train:
+    data_path: Annotation/segmentation/HE2Json_train.json
+    patch_cls_path: segmentation/patch_cls/train/
+  val:
+    data_path: /media/server/Newsmy/WSI_RawData/CY_SL_FD_HS/Annotation/segmentation/HE2Json_val.json
+    patch_cls_path: segmentation/patch_cls/val/
+    valid_number: 800
+  test:
+    data_path: /media/server/Newsmy/WSI_RawData/CY_SL_FD_HS/Annotation/segmentation/HE2Json_test.json
+    patch_cls_path: segmentation/patch_cls/test/
+
+  sample_class_num: ["cancer", "cancer_beside", "normal_liver", "hemorrhage_necrosis", "tertiary_lymphatic", "other"]
+  image_size: 768
+  patch_size: 256
+  crop_size: 224
+  labels_dic: {"no_cancer": 0, "cancer": 1}
+
+train:
+  pretrain: ''
+  resume: ''
+  epoch: 100
+  start_epoch: 0
+  batch_size_perGPU: 64
+  num_workers_perGPU: 1
+  device_ids: "3"
+  optimizer:
+    type: Adam
+    kwargs:
+      lr: 0.001
+      weight_decay: 0.0001
+      betas_0: 0.9
+      betas_1: 0.999
+  lr_scheduler: 
+    mode: step
+    kwargs:
+      step_size: 5
+      gamma: 0.8
+  loss_fn:
+    name: CrossEntropy
+    
+val:
+  is_sample: True
+  batch_size_perGPU: 200
+  log_every: 2
+  thresh: 0.5
+
+test:
+  batch_size_perGPU: 200
+  num_workers_perGPU: 5
+  weights_path: ./logs/classification/ckpt/250715_res34_upload/20.ckpt
+  thresh: 0.2
+
+saver:
+  # to save tensorboard events and ckpt
+  experiment_name: '250715_res34_upload'
+  ckpt_save_path: ./logs/classification/ckpt
+  log_save_path: ./logs/classification/events
+  test_result: "test_result.json"
+
+model:
+  model_name: resnet34
+  kwargs:
+  num_classes: 1
+  use_crf: True
+  level_crf: True
+  pretrain: True
+  concat_level_feats: False
+  use_level_to_cal:
+    train: [ 0 ]
+    val: [ 0 ]
+    test: [ 0 ]

@@ -1,0 +1,74 @@
+# Required
+dataset:
+  data_root: /home/server/Disk3/MedSegmentData/LC25000/lung_colon_image_set/lung_image_sets
+  train:
+    data_path: lung_image_sets
+    patch_cls_path: train
+
+  val:
+    data_path: lung_image_sets
+    patch_cls_path: val
+
+  test:
+    data_path: lung_image_sets
+    patch_cls_path: test
+
+  image_size: 768
+  patch_size: 256
+  crop_size: 224
+#  labels_dic: {"lung_n": 0, "lung_cc_aca": 1}
+
+train:
+  pretrain: ''
+  resume: ''
+  epoch: 5
+  start_epoch: 0
+  batch_size_perGPU: 64
+  num_workers_perGPU: 1
+  device_ids: "3"
+  optimizer:
+    type: Adam
+    kwargs:
+      lr: 0.001
+      weight_decay: 0.0001
+      betas_0: 0.9
+      betas_1: 0.999
+  lr_scheduler: 
+    mode: step
+    kwargs:
+      step_size: 5
+      gamma: 0.8
+  loss_fn:
+    name: CrossEntropy
+    
+val:
+  is_sample: True
+  batch_size_perGPU: 240
+  log_every: 1
+  thresh: 0.6
+
+test:
+  batch_size_perGPU: 240
+  num_workers_perGPU: 1
+  weights_path: ./logs/classification/ckpt/251025Lung_res34_upload/4.ckpt
+  thresh: 0.6
+
+saver:
+  # to save tensorboard events and ckpt
+  experiment_name: '251025Lung_res34_upload'
+  ckpt_save_path: ./logs/classification/ckpt
+  log_save_path: ./logs/classification/events
+  test_result: "test_result.json"
+
+model:
+  model_name: resnet34
+  kwargs:
+  num_classes: 1
+  use_crf: True
+  level_crf: True
+  pretrain: True
+  concat_level_feats: False
+  use_level_to_cal:
+    train: [ 0 ]
+    val: [ 0 ]
+    test: [ 0 ]
