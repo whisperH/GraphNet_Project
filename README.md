@@ -259,7 +259,13 @@ The computation of WSI required for liver transplantation into G-TRS involves th
     python InferGTRS.py --use_gnn_norm --parent_dir folder_to_save_process_data --graph_file_saved_path GraphData --data_inferlists CenterName --finished_model /path_to_GraphNetModel/GraphNet_Model.pth --out_result_dir /out_result_dir/
     ```
 
+# The dataset and weights information
+## The Classification dataset
+- Lung and Colon Cancer Histopathological Images.([Link](https://www.kaggle.com/datasets/andrewmvd/lung-and-colon-cancer-histopathological-images))
+- Histological images for tumor detection in gastrointestinal cancer.([Link](https://zenodo.org/records/2530789))
 
+## The Prognoistic dataset
+- The Graph Data of 20 patches and the weights.([GraphNet Information](https://drive.google.com/drive/folders/1Yr9xDQbbG5oi9EdMXzcy3cZGt54ALPDw?usp=sharing))
 
 # Our implementation refers the following publicly available codes.
 - Shi JY，Wang X，Ding GY，et al.Exploring prognostic indicators in the pathological images of hepatocellular carcinoma based on deep learning［J］.Gut，2021，70（5）：951-961.
