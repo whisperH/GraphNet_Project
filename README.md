@@ -258,6 +258,8 @@ The computation of WSI required for liver transplantation into G-TRS involves th
 
     python InferGTRS.py --use_gnn_norm --parent_dir folder_to_save_process_data --graph_file_saved_path GraphData --data_inferlists CenterName --finished_model /path_to_GraphNetModel/GraphNet_Model.pth --out_result_dir /out_result_dir/
     ```
+### Using R code for statistical analysis:
+Regarding the omic data analysis in the paper, we have provided corresponding R code in the folder of "R_Statistical_Analysis", including statistical analysis, KM, Cox and Clinical Analysis, as well as Proteomic analysis. The three files contain detailed step-by-step instructions, and the corresponding data can be found in the data attachments provided in the published paper.
 
 # The dataset and weights information
 ## The Classification dataset
