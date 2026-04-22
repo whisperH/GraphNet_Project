@@ -30,13 +30,22 @@ cd GraphNet_Project
 conda env create -f environment.yml
 ```
 
-## Execution Guide:
-> Note: If you already have files that constitute the graph data, please directly execute the following command; otherwise, refer to the content in step A to generate patches from WSI slides(step 1.3), construct the graph(step 2, step 3), and perform inference (step 4.2).
+## Inference Guide:
+If graph data files are already available, execute the command below directly.
 ‘‘‘bash
     python InferGTRS.py --use_gnn_norm --parent_dir ../dataset --graph_file_saved_path GraphDataNone --finished_model ../pretrain/GraphNet_Model.pth --out_result_dir ../logs/TCGA_Test
 ’’’
 
+Otherwise, follow the Full Execution Guide to complete the following:
 
+1. Generate patches from WSI slides (Step 1.3).
+
+2. Construct the graph (Steps 2 and 3).
+
+3. Perform inference (Step 4.2).
+
+
+## Full Execution Guide:
 
 The Structure of file is:
 
